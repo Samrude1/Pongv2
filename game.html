@@ -36,10 +36,16 @@
       if (showingWinScreen) {
         player1Score = 0;
         player2Score = 0;
+        ballSpeedX = 10;
+        ballSpeedY = 10;
+        frames = 0;
         showingWinScreen = false;
       }
     }
     function counter() {
+      if (showingWinScreen) {
+        return;
+      }
       frames++;
       if (frames % 900 === 0) {
         ballSpeedX *= 1.5;
@@ -135,17 +141,20 @@
 
     function drawEverything() {
       colorRect(0, 0, canvas.width, canvas.height, "black");
+      canvasContext.font = "30px Arial";
 
       if (showingWinScreen) {
         canvasContext.fillStyle = "white";
 
         if (player1Score >= WINNING_SCORE) {
-          canvasContext.fillText("Left Player Won", 350, 200);
+          canvasContext.textAlign = "center";
+          canvasContext.fillText("Left Player Won", 400, 200);
         } else if (player2Score >= WINNING_SCORE) {
-          canvasContext.fillText("Right Player Won", 350, 200);
+          canvasContext.textAlign = "center";
+          canvasContext.fillText("Right Player Won", 400, 200);
         }
 
-        canvasContext.fillText("click to continue", 350, 500);
+        canvasContext.fillText("click to continue", 400, 500);
         return;
       }
 
